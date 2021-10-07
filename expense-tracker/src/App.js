@@ -1,12 +1,15 @@
 import React from "react";
 import "./App.css";
 
-import ExpenseItem from "./components/expense-item/ExpenseItem";
+import expensesData from "./data/expense.data";
+import Expenses from "./components/expenses/Expenses";
 
 function App() {
+  const [expensesArray, setExpenses] = React.useState(expensesData);
+
   return (
     <>
-      <ExpenseItem />
+      <Expenses expensesArray={expensesArray} />
     </>
   );
 }
