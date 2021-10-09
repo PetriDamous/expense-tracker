@@ -9,7 +9,7 @@ function App() {
   const [expensesArray, setExpenses] = React.useState(expensesData);
 
   const onUpdateExpenseData = (newExpenseData) => {
-    setExpenses((prevState) => [...prevState, { ...newExpenseData }]);
+    setExpenses((prevState) => [{ ...newExpenseData }, ...prevState]);
   };
 
   return (

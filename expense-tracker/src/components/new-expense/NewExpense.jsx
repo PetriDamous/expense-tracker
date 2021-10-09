@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 import "./styles/new-expense.css";
 import ExpenseForm from "../expense-form/ExpenseForm";
 
@@ -7,7 +8,7 @@ const NewExpense = ({ onUpdateExpenseData }) => {
     const newExpense = {
       ...newExpenseData,
       date: new Date(newExpenseData.date),
-      id: Math.random().toString(),
+      id: uuidv4(),
     };
 
     onUpdateExpenseData(newExpense);
