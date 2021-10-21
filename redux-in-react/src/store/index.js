@@ -4,7 +4,21 @@ export const increment = () => ({ type: "INCREMENT" });
 
 export const decrement = () => ({ type: "DECREMENT" });
 
-const countReducer = (state = { count: 0 }, action) => {
+export const increase = (num) => {
+  return {
+    type: "INCREASE",
+    payload: num,
+  };
+};
+
+export const toggle = () => ({ type: "TOGGLE" });
+
+const INITIAL_STATE = {
+  count: 0,
+  isToggle: true,
+};
+
+const countReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case "INCREMENT":
       return {
@@ -15,6 +29,16 @@ const countReducer = (state = { count: 0 }, action) => {
       return {
         ...state,
         count: state.count - 1,
+      };
+    case "INCREASE":
+      return {
+        ...state,
+        count: state.count + action.payload,
+      };
+    case "TOGGLE":
+      return {
+        ...state,
+        isToggle: !state.isToggle,
       };
     default:
       return state;
