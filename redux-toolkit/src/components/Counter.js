@@ -5,12 +5,12 @@ import {
   decrement,
   incrementByAmount,
   toggleCounter,
-} from "../store";
+} from "../store/counterReducer";
 
 import Button from "./Button/Button";
 
 const Counter = () => {
-  const { count, isToggle } = useSelector((state) => state);
+  const { count, isToggle } = useSelector((state) => state.counter);
 
   const dispatch = useDispatch();
 
