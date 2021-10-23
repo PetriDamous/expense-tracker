@@ -1,5 +1,6 @@
 import { createSlice, configureStore } from "@reduxjs/toolkit";
 import { v4 as uuidv4 } from "uuid";
+import { findIndex, getTotal } from "../utility/utility";
 
 /**
  * Setup global quantity
@@ -18,7 +19,6 @@ import { v4 as uuidv4 } from "uuid";
 
 const initialState = {
   items: [],
-  totalQuantity: 0,
 };
 
 const shoppingSlice = createSlice({
@@ -26,11 +26,8 @@ const shoppingSlice = createSlice({
   initialState,
   reducers: {
     addItem(state, action) {
-      const idx = state.items.findIndex(
-        (item) => item.title === action.payload.title
-      );
+      const idx = findIndex(state.items, action.payload, "title");
 
-      console.log(action.payload.price);
       if (idx === -1) {
         const newItem = {
           id: uuidv4(),
@@ -39,7 +36,7 @@ const shoppingSlice = createSlice({
           price: action.payload.price,
         };
 
-        newItem.total = action.payload.price * newItem.quantity;
+        newItem.total = getTotal(action.payload.price, newItem.quantity);
 
         state.items = [newItem, ...state.items];
         return;
@@ -49,11 +46,32 @@ const shoppingSlice = createSlice({
       state.items[idx].total =
         state.items[idx].quantity * state.items[idx].price;
     },
-    incrementQauntity(state) {
-      state.totalQuantity++;
+    removeItem(state, action) {
+      const newItemsArray = state.items.filter(
+        (item) => item.id !== action.payload.id
+      );
+
+      state.items = [...newItemsArray];
     },
-    decrementQauntity(state) {
-      state.totalQuantity--;
+    incrementQauntity(state, action) {
+      const idx = findIndex(state.items, action.payload, "id");
+
+      state.items[idx].quantity++;
+
+      state.items[idx].total = getTotal(
+        state.items[idx].price,
+        state.items[idx].quantity
+      );
+    },
+    decrementQauntity(state, action) {
+      const idx = findIndex(state.items, action.payload, "id");
+
+      state.items[idx].quantity--;
+
+      state.items[idx].total = getTotal(
+        state.items[idx].price,
+        state.items[idx].quantity
+      );
     },
   },
 });
@@ -67,6 +85,7 @@ const store = configureStore({
 
 console.log(store.getState());
 
-export const { addItem } = shoppingSlice.actions;
+export const { addItem, removeItem, incrementQauntity, decrementQauntity } =
+  shoppingSlice.actions;
 
 export default store;

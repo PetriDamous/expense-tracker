@@ -8,8 +8,6 @@ const Products = (props) => {
   const items = useSelector((state) => state.items);
   const dispatch = useDispatch();
 
-  console.log(items);
-
   const handleAddToCart = (product) => {
     dispatch(addItem(product));
   };

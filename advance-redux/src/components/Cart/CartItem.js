@@ -1,23 +1,24 @@
+import { useDispatch } from "react-redux";
+import { incrementQauntity, decrementQauntity, removeItem } from "../../store";
 import classes from "./CartItem.module.css";
 
-/**
- * Local state to track local quanity
- *  i. Starting state is 1
- *
- * Global quanity that works with local quanity
- *  i. function that increases local quanity as well as global quanity
- *
- *  Quanity reaches zero or below remove item from global state
- *   i. make function to trigger action and conditional to watch out for zero
- *
- *  Add remove button
- *    i. item removes subtract local quantity from global quantity
- *
- *  Track total based on quanity
- */
-
 const CartItem = (props) => {
-  const { title, quantity, total, price } = props;
+  const dispatch = useDispatch();
+
+  const { id, title, quantity, total, price } = props;
+
+  const handleIncrement = () => {
+    dispatch(incrementQauntity({ id }));
+  };
+
+  const handleDecrement = () => {
+    if (quantity <= 1) {
+      dispatch(removeItem({ id }));
+      return;
+    }
+
+    dispatch(decrementQauntity({ id }));
+  };
 
   return (
     <li className={classes.item}>
@@ -33,8 +34,8 @@ const CartItem = (props) => {
           x <span>{quantity}</span>
         </div>
         <div className={classes.actions}>
-          <button>-</button>
-          <button>+</button>
+          <button onClick={handleDecrement}>-</button>
+          <button onClick={handleIncrement}>+</button>
         </div>
       </div>
     </li>
