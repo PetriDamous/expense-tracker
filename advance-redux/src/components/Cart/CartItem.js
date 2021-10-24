@@ -1,5 +1,9 @@
 import { useDispatch } from "react-redux";
-import { incrementQauntity, decrementQauntity, removeItem } from "../../store";
+import {
+  incrementQauntity,
+  decrementQauntity,
+  removeItem,
+} from "../../store/cart-slice";
 import classes from "./CartItem.module.css";
 
 const CartItem = (props) => {
