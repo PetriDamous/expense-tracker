@@ -8,11 +8,10 @@ section-10-context
 
 ## HTTP Project
 
-scetion-14-http
+section-14-preparing-the-project-for-the-next-steps
 
-1. Add data from SWAPI into app
-2. Use promise chain
-3. Then convert to async await
+1. Add try catch and error handling for POSTing movies
+2. Get Google Firebase to work correctly with small app (Friday)
 
 ## Advance Redux
 
