@@ -12,27 +12,31 @@ function App() {
   const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-    try {
-      // https://swapi.dev/api/films/
 
+    try {
       const response = await fetch(process.env.REACT_APP_HTTP);
+
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
 
       const data = await response.json();
 
-      const transformedMovies = data.results.map((movieData) => {
-        return {
-          id: movieData.episode_id,
-          title: movieData.title,
-          openingText: movieData.opening_crawl,
-          releaseDate: movieData.release_date,
-        };
-      });
-      setMovies(transformedMovies);
+      const loadedMoviesArray = [];
+
+      for (const property in data) {
+        loadedMoviesArray.push(data[property]);
+      }
+
+      console.log(loadedMoviesArray);
+
+      setMovies(loadedMoviesArray);
     } catch (error) {
-      setError(error.message);
+      if (error.message === "data is null") {
+        setError("There are currently no movies.");
+      } else {
+        setError(error.message);
+      }
     }
     setIsLoading(false);
   }, []);
