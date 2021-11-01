@@ -11,7 +11,17 @@ section-10-context
 section-14-preparing-the-project-for-the-next-steps
 
 1. Add try catch and error handling for POSTing movies
-2. Get Google Firebase to work correctly with small app (Friday)
+
+## Custom Hook Project
+
+section-15-custom-hooks-http
+
+1. Refactor code to make flexiable.
+   1. Currently we are putting to much logic in our custom hook. custom hook should only handle http request. all will be specific to that component.
+2. Watch this: https://academind.com/tutorials/function-bind-event-execution
+   1. https://www.youtube.com/watch?v=uBdH0iB1VDM (call, apply, bind)
+3. Go over useEffect() and useCallback() and understand how to use dependences.
+   1. Also take notes on how to use each dependences array.
 
 ## Advance Redux
 
