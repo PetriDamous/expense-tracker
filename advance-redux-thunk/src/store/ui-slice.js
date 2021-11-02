@@ -2,6 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isToggle: true,
+  notification: {
+    isNotification: false,
+    status: "",
+    title: "",
+    message: "",
+  },
 };
 
 const uiSlice = createSlice({
@@ -11,9 +17,14 @@ const uiSlice = createSlice({
     toggle(state) {
       state.isToggle = !state.isToggle;
     },
+    setNotification(state, action) {
+      state.notification = {
+        ...action.payload,
+      };
+    },
   },
 });
 
-export const { toggle } = uiSlice.actions;
+export const { toggle, setNotification } = uiSlice.actions;
 
 export default uiSlice.reducer;
