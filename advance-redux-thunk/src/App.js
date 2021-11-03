@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setNotification } from "./store/ui-slice";
+import { sendCartData, fetchCartData } from "./store/cart-slice";
 
 import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
@@ -10,7 +10,7 @@ let isInitialRun = true;
 
 function App() {
   const isToggle = useSelector((state) => state.ui.isToggle);
-  const cart = useSelector((state) => state.cart.cartItems);
+  const { cartItems, isCartStateChange } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,46 +19,18 @@ function App() {
       return;
     }
 
-    dispatch(
-      setNotification({
-        isNotification: true,
-        status: "pending",
-        title: "Sending",
-        message: "Sending request.",
-      })
-    );
+    console.log("out", isCartStateChange);
 
-    const sendData = async () => {
-      const response = await fetch(process.env.REACT_APP_HTTP, {
-        method: "PUT",
-        body: JSON.stringify(cart),
-      });
+    if (isCartStateChange) {
+      console.log("in", isCartStateChange);
 
-      if (!response.ok) {
-        throw new Error("Shit got fucked up!");
-      }
+      dispatch(sendCartData(cartItems));
+    }
+  }, [cartItems, dispatch]);
 
-      dispatch(
-        setNotification({
-          isNotification: true,
-          status: "success",
-          title: "Sent",
-          message: "Request sent",
-        })
-      );
-    };
-
-    sendData().catch((e) => {
-      dispatch(
-        setNotification({
-          isNotification: true,
-          status: "error",
-          title: "Error",
-          message: e.message,
-        })
-      );
-    });
-  }, [cart, dispatch]);
+  useEffect(() => {
+    dispatch(fetchCartData());
+  }, [dispatch]);
 
   return (
     <Layout>

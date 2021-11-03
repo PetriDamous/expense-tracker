@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { sendCartData } from "./store/cart-slice";
+import { setNotification } from "./store/ui-slice";
 
 import Cart from "./components/Cart/Cart";
 import Layout from "./components/Layout/Layout";
@@ -19,7 +19,45 @@ function App() {
       return;
     }
 
-    dispatch(sendCartData(cart));
+    dispatch(
+      setNotification({
+        isNotification: true,
+        status: "pending",
+        title: "Sending",
+        message: "Sending request.",
+      })
+    );
+
+    const sendData = async () => {
+      const response = await fetch(process.env.REACT_APP_HTTP, {
+        method: "PUT",
+        body: JSON.stringify(cart),
+      });
+
+      if (!response.ok) {
+        throw new Error("Shit got fucked up!");
+      }
+
+      dispatch(
+        setNotification({
+          isNotification: true,
+          status: "success",
+          title: "Sent",
+          message: "Request sent",
+        })
+      );
+    };
+
+    sendData().catch((e) => {
+      dispatch(
+        setNotification({
+          isNotification: true,
+          status: "error",
+          title: "Error",
+          message: e.message,
+        })
+      );
+    });
   }, [cart, dispatch]);
 
   return (

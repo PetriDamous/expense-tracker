@@ -1,51 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { findItem, getTotal } from "../utility/utility";
-import { setNotification } from "./ui-slice";
-
-// Custom action creators
-export const sendCartData = (cart) => {
-  return async (dispatch) => {
-    dispatch(
-      setNotification({
-        isNotification: true,
-        status: "pending",
-        title: "Sending",
-        message: "Sending request.",
-      })
-    );
-
-    const sendData = async () => {
-      const response = await fetch(process.env.REACT_APP_HTTP, {
-        method: "PUT",
-        body: JSON.stringify(cart),
-      });
-
-      if (!response.ok) {
-        throw new Error("Shit got fucked up!");
-      }
-
-      dispatch(
-        setNotification({
-          isNotification: true,
-          status: "success",
-          title: "Sent",
-          message: "Request sent",
-        })
-      );
-    };
-
-    sendData().catch((e) => {
-      dispatch(
-        setNotification({
-          isNotification: true,
-          status: "error",
-          title: "Error",
-          message: e.message,
-        })
-      );
-    });
-  };
-};
 
 const initialState = {
   cartItems: [],
