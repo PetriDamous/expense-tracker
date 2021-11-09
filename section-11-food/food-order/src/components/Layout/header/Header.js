@@ -5,12 +5,12 @@ import headerImage from "../../../assets/meals.jpg";
 
 import CartButton from "../cart-button/CartButton";
 
-const Header = () => {
+const Header = ({ handleShowCart }) => {
   return (
     <>
       <header className={classes.header}>
         <h1>Junk Meals</h1>
-        <CartButton />
+        <CartButton handleShowCart={handleShowCart} />
       </header>
       <div className={classes["main-image"]}>
         <img src={headerImage} alt="A table full of food." />

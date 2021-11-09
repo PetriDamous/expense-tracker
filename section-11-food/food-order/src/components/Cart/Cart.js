@@ -3,30 +3,34 @@ import React from "react";
 import classes from "./styles/cart.module.css";
 
 import Button from "../UI/Button/Button";
+import Modal from "../UI/Modal/Modal";
 
-const Cart = (props) => {
+const Cart = ({ handleHideCart }) => {
   const cartItems = (
     <ul>
       {[{ name: "dick" }].map((item) => (
-        <li>{item.name}</li>
+        <li className={classes["cart-items"]}>{item.name}</li>
       ))}
     </ul>
   );
 
   return (
-    <div>
+    <Modal handleHideCart={handleHideCart}>
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
         <span>36.99</span>
       </div>
-      <div>
-        <Button classValue={classes["button--alt"]} button={null}>
+      <div className={classes.actions}>
+        <Button
+          classValue={classes["button--alt"]}
+          button={{ onClick: handleHideCart }}
+        >
           Close
         </Button>
         <Button classValue={classes.button}>Order</Button>
       </div>
-    </div>
+    </Modal>
   );
 };
 

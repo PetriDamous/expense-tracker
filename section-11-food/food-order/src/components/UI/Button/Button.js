@@ -1,6 +1,6 @@
 import React from "react";
 
-const Button = ({ children, classValue, button }) => {
+const Button = ({ children, classValue = null, button = null }) => {
   return (
     <button className={classValue} {...button}>
       {children}

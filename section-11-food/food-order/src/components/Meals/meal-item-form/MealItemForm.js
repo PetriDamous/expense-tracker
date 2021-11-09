@@ -19,9 +19,7 @@ export const MealItemForm = (props) => {
             step: "1",
           }}
         />
-        <Button classValue={null} button={null}>
-          + Add
-        </Button>
+        <Button>+ Add</Button>
       </form>
     </>
   );
