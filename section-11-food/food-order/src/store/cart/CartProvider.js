@@ -7,12 +7,12 @@ const CartProvider = (props) => {
 
   const cartContext = {
     ...cartState,
-    addItem: (item) => {
-      cartDispatch({ type: "ADD_ITEM", payload: item });
-    },
-    removeItem: (id) => {
-      cartDispatch({ type: "REMOVE_ITEM", payload: id });
-    },
+    addItem: (item) => cartDispatch({ type: "ADD_ITEM", payload: item }),
+    removeItem: (id) => cartDispatch({ type: "REMOVE_ITEM", payload: id }),
+    incrementQuantity: (id) =>
+      cartDispatch({ type: "INCREMENT_ITEM", payload: id }),
+    decrementQuantity: (id) =>
+      cartDispatch({ type: "DECREMENT_ITEM", payload: id }),
   };
 
   return (

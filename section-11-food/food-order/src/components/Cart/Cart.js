@@ -14,11 +14,27 @@ const Cart = ({ handleHideCart }) => {
 
   const isOrderVisiable = cartCtx.cartItems.length > 0;
 
+  const onAdd = (id) => cartCtx.incrementQuantity(id);
+
+  const onRemove = (id, amount) => {
+    if (amount <= 1) {
+      cartCtx.removeItem(id);
+    }
+
+    cartCtx.decrementQuantity(id);
+  };
+
   const cartItems = (
     <ul>
       {cartCtx.cartItems.map(({ id, ...otherProps }) => (
         <li className={classes["cart-items"]}>
-          <CartItem key={id} id={id} {...otherProps} />
+          <CartItem
+            key={id}
+            id={id}
+            onAdd={onAdd}
+            onRemove={onRemove}
+            {...otherProps}
+          />
         </li>
       ))}
     </ul>
