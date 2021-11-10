@@ -1,6 +1,6 @@
 export const initialCartState = {
   cartItems: [],
-  totalAmount: 0,
+  totalPrice: 0,
   totalQuantity: 0,
 };
 
@@ -11,14 +11,15 @@ export const cartReducer = (state, action) => {
 
       const updatedCart = [action.payload, ...cartItems];
 
-      // const updatedTotalAmount = cartItems.reduce((init, current) => {
-      //   return init + current.price;
-      // }, 0);
+      const updatedTotalPrice = updatedCart.reduce((init, current) => {
+        return init + current.price * current.amount;
+      }, 0);
 
       return {
         ...state,
         cartItems: updatedCart,
         totalQuantity: totalQuantity + action.payload.amount,
+        totalPrice: updatedTotalPrice,
       };
 
     case "REMOVE_ITEM":

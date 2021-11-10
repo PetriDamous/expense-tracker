@@ -10,6 +10,10 @@ import CartItem from "./cart-items/CartItem";
 const Cart = ({ handleHideCart }) => {
   const cartCtx = React.useContext(CartContext);
 
+  const totalPrice = `${cartCtx.totalPrice.toFixed(2)}`;
+
+  const isOrderVisiable = cartCtx.cartItems.length > 0;
+
   const cartItems = (
     <ul>
       {cartCtx.cartItems.map(({ id, ...otherProps }) => (
@@ -25,7 +29,7 @@ const Cart = ({ handleHideCart }) => {
       {cartItems}
       <div className={classes.total}>
         <span>Total Amount</span>
-        <span>36.99</span>
+        <span>{totalPrice}</span>
       </div>
       <div className={classes.actions}>
         <Button
@@ -34,7 +38,7 @@ const Cart = ({ handleHideCart }) => {
         >
           Close
         </Button>
-        <Button classValue={classes.button}>Order</Button>
+        {isOrderVisiable && <Button classValue={classes.button}>Order</Button>}
       </div>
     </Modal>
   );
