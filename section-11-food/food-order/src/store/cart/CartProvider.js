@@ -1,13 +1,18 @@
+import React, { useReducer } from "react";
 import CartContext from "./cart-context";
-
-import React from "react";
+import { initialCartState, cartReducer } from "./cart-reducer";
 
 const CartProvider = (props) => {
+  const [cartState, cartDispatch] = useReducer(cartReducer, initialCartState);
+
   const cartContext = {
-    cartItems: [],
-    totalQuantity: 0,
-    addItem: (item) => {},
-    removeItem: (id) => {},
+    ...cartState,
+    addItem: (item) => {
+      cartDispatch({ type: "ADD_ITEM", payload: item });
+    },
+    removeItem: (id) => {
+      cartDispatch({ type: "REMOVE_ITEM", payload: id });
+    },
   };
 
   return (

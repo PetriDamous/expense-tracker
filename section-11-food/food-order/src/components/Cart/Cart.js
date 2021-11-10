@@ -1,15 +1,21 @@
 import React from "react";
 
 import classes from "./styles/cart.module.css";
+import CartContext from "../../store/cart/cart-context";
 
 import Button from "../UI/Button/Button";
 import Modal from "../UI/Modal/Modal";
+import CartItem from "./cart-items/CartItem";
 
 const Cart = ({ handleHideCart }) => {
+  const cartCtx = React.useContext(CartContext);
+
   const cartItems = (
     <ul>
-      {[{ name: "dick" }].map((item) => (
-        <li className={classes["cart-items"]}>{item.name}</li>
+      {cartCtx.cartItems.map(({ id, ...otherProps }) => (
+        <li className={classes["cart-items"]}>
+          <CartItem key={id} id={id} {...otherProps} />
+        </li>
       ))}
     </ul>
   );
