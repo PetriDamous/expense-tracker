@@ -3,51 +3,74 @@ import { useState } from "react";
 const SimpleInput = (props) => {
   const [nameValue, setName] = useState("");
   const [emailValue, setEmail] = useState("");
-  const [isTouched, setTouched] = useState(false);
+  const [isNameTouched, setNameTouched] = useState(false);
+  const [isEmailTouched, setEmailTouched] = useState(false);
 
   const isNameValid = nameValue.trim() !== "";
-  const isNameInvalid= !isNameValid && isTouched;
+  const isNameInvalid = !isNameValid && isNameTouched; // false && true
 
-  const isEmailValid = emailValue.trim() !== "" && emailValue.trim().includes("@");
-  const isEmailInvalid = !isEmailValid && isTouched;
+  console.log("name", !isNameValid, isNameTouched);
 
-  const inputValidArray = [isNameValid];
+  const isEmailValid =
+    emailValue.trim() !== "" && emailValue.trim().includes("@");
+  const isEmailInvalid = !isEmailValid && isEmailTouched;
 
-  const isAllInputsValid = inputValidArray.every(nameValue => nameValue === true);
- 
+  console.log("email", !isEmailValid, isEmailTouched);
+
+  const inputValidArray = [isNameValid, isEmailValid];
+
+  const isAllInputsValid = inputValidArray.every((value) => value === true);
+
+  console.log("all inputs", isAllInputsValid);
+
   let isFormValid = false;
 
-  if(isAllInputsValid) {
+  if (isAllInputsValid) {
     isFormValid = true;
   }
 
   const handleInput = (e) => {
-    const { value } = e.target;
- 
-    setTouched(true);
+    const { value, name } = e.target;
 
-    setName(value);
+    if (name === "name") {
+      setName(value);
+      setNameTouched(true);
+    }
+
+    if (name === "email") {
+      setEmail(value);
+      setEmailTouched(true);
+    }
   };
 
-  const handleBlur = () => {
-    setTouched(true);
+  const handleBlur = (e) => {
+    const { name } = e.target;
+
+    if (name === "name") {
+      setNameTouched(true);
+    }
+
+    if (name === "email") {
+      setEmailTouched(true);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    setTouched(true);
+    // setNameTouched(true);
 
-    if (nameValue.trim() === "") {      
+    if (nameValue.trim() === "" || emailValue.trim() === "") {
       return;
     }
 
     setName("");
+    setEmail("");
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={`form-control ${isNameInvalid&& `invalid`}`}>
+      <div className={`form-control ${isNameInvalid && `invalid`}`}>
         <label htmlFor="name">Your Name</label>
         <input
           type="text"
@@ -64,7 +87,7 @@ const SimpleInput = (props) => {
       )}
 
       <div className={`form-control ${isEmailInvalid && `invalid`}`}>
-        <label htmlFor="name">Your Name</label>
+        <label htmlFor="name">Your Email</label>
         <input
           type="text"
           id="name"
@@ -75,9 +98,7 @@ const SimpleInput = (props) => {
         />
       </div>
 
-      {isEmailInvalid && (
-        <p className="error-text">Enter a fuckin email....</p>
-      )}
+      {isEmailInvalid && <p className="error-text">Enter a fuckin email....</p>}
 
       <div className="form-actions">
         <button disabled={!isFormValid}>Submit</button>

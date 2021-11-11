@@ -8,8 +8,6 @@ section-10-context
 
 ## HTTP Project
 
-section-14-preparing-the-project-for-the-next-steps
-
 1. Add try catch and error handling for POSTing movies
 
 ## Custom Hook Project
