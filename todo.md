@@ -26,3 +26,7 @@ section-15-custom-hooks-http
 advance-redux
 
 1. setup a dummy firebase to send HTTP requests to.
+
+## HW
+
+https://academind.com/tutorials/reactjs-a-custom-useform-hook

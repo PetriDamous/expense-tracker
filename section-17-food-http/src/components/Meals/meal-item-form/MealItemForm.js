@@ -26,17 +26,20 @@ export const MealItemForm = (props) => {
   return (
     <>
       <form className={classes.form} onSubmit={handleSubmit}>
-        <Input
-          ref={inputRef}
-          input={{
-            id: `amount-${props.id}`,
-            type: "number",
-            min: "0",
-            max: "5",
-            defaultValue: "0",
-            step: "1",
-          }}
-        />
+        <div className={classes.input}>
+          <Input
+            ref={inputRef}
+            input={{
+              id: `amount-${props.id}`,
+              type: "number",
+              min: "0",
+              max: "5",
+              defaultValue: "0",
+              step: "1",
+            }}
+          />
+        </div>
+
         <Button>+ Add</Button>
         {!isAmountValid && <p>Please enter correct amount.</p>}
       </form>

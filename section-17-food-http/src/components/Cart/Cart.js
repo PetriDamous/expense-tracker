@@ -7,7 +7,7 @@ import Button from "../UI/Button/Button";
 import Modal from "../UI/Modal/Modal";
 import CartItem from "./cart-items/CartItem";
 
-const Cart = ({ handleHideCart }) => {
+const Cart = ({ handleHideCart, handleShowCheckout }) => {
   const cartCtx = React.useContext(CartContext);
 
   const totalPrice = `${cartCtx.totalPrice.toFixed(2)}`;
@@ -22,6 +22,11 @@ const Cart = ({ handleHideCart }) => {
     }
 
     cartCtx.decrementQuantity(id);
+  };
+
+  const handleOrder = () => {
+    handleShowCheckout();
+    handleHideCart();
   };
 
   const cartItems = (
@@ -54,7 +59,11 @@ const Cart = ({ handleHideCart }) => {
         >
           Close
         </Button>
-        {isOrderVisiable && <Button classValue={classes.button}>Order</Button>}
+        {isOrderVisiable && (
+          <Button classValue={classes.button} button={{ onClick: handleOrder }}>
+            Order
+          </Button>
+        )}
       </div>
     </Modal>
   );
