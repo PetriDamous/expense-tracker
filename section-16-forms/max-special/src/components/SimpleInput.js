@@ -1,27 +1,27 @@
-import { useState } from "react";
+import useInput from "../hooks/use-input";
 
 const SimpleInput = (props) => {
-  const [nameValue, setName] = useState("");
-  const [emailValue, setEmail] = useState("");
-  const [isNameTouched, setNameTouched] = useState(false);
-  const [isEmailTouched, setEmailTouched] = useState(false);
+  const [
+    nameValue,
+    isNameValid,
+    isNameInvalid,
+    handleNameInput,
+    handleNameBlur,
+    nameValueRest,
+  ] = useInput((value) => value.trim() !== "");
 
-  const isNameValid = nameValue.trim() !== "";
-  const isNameInvalid = !isNameValid && isNameTouched; // false && true
-
-  console.log("name", !isNameValid, isNameTouched);
-
-  const isEmailValid =
-    emailValue.trim() !== "" && emailValue.trim().includes("@");
-  const isEmailInvalid = !isEmailValid && isEmailTouched;
-
-  console.log("email", !isEmailValid, isEmailTouched);
+  const [
+    emailValue,
+    isEmailValid,
+    isEmailInvalid,
+    handleEmailInput,
+    handleEmailBlur,
+    emailValueRest,
+  ] = useInput((value) => value.trim() !== "" && value.trim().includes("@"));
 
   const inputValidArray = [isNameValid, isEmailValid];
 
   const isAllInputsValid = inputValidArray.every((value) => value === true);
-
-  console.log("all inputs", isAllInputsValid);
 
   let isFormValid = false;
 
@@ -29,43 +29,11 @@ const SimpleInput = (props) => {
     isFormValid = true;
   }
 
-  const handleInput = (e) => {
-    const { value, name } = e.target;
-
-    if (name === "name") {
-      setName(value);
-      setNameTouched(true);
-    }
-
-    if (name === "email") {
-      setEmail(value);
-      setEmailTouched(true);
-    }
-  };
-
-  const handleBlur = (e) => {
-    const { name } = e.target;
-
-    if (name === "name") {
-      setNameTouched(true);
-    }
-
-    if (name === "email") {
-      setEmailTouched(true);
-    }
-  };
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // setNameTouched(true);
-
-    if (nameValue.trim() === "" || emailValue.trim() === "") {
-      return;
-    }
-
-    setName("");
-    setEmail("");
+    nameValueRest();
+    emailValueRest();
   };
 
   return (
@@ -76,8 +44,8 @@ const SimpleInput = (props) => {
           type="text"
           id="name"
           name="name"
-          onChange={handleInput}
-          onBlur={handleBlur}
+          onChange={handleNameInput}
+          onBlur={handleNameBlur}
           value={nameValue}
         />
       </div>
@@ -92,8 +60,8 @@ const SimpleInput = (props) => {
           type="text"
           id="name"
           name="email"
-          onChange={handleInput}
-          onBlur={handleBlur}
+          onChange={handleEmailInput}
+          onBlur={handleEmailBlur}
           value={emailValue}
         />
       </div>
