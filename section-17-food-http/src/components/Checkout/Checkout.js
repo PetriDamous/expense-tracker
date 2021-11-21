@@ -59,19 +59,6 @@ const Checkout = ({ handleHideCheckout }) => {
     isCityValid,
   ];
 
-  const isFormValid = inputValidCheckArray.every((value) => value === true);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!isFormValid) return;
-
-    nameInputRest();
-    streetInputRest();
-    zipInputRest();
-    cityInputRest();
-  };
-
   const inputSettingsArray = [
     {
       inputSettings: {
@@ -118,6 +105,19 @@ const Checkout = ({ handleHideCheckout }) => {
       inputError: `${cityHasError && classes.invalid}`,
     },
   ];
+
+  const isFormValid = inputValidCheckArray.every((value) => value === true);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (!isFormValid) return;
+
+    nameInputRest();
+    streetInputRest();
+    zipInputRest();
+    cityInputRest();
+  };
 
   return (
     <Modal>
