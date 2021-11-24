@@ -10,7 +10,7 @@ const QuoteDetail = () => {
     <>
       <h1>QuoteDetail Page</h1>
       <p>Product: {quoteId}</p>
-      <Route path={`/quotes/:${quoteId}/comments`}>
+      <Route path={`/quotes/${quoteId}/comments`}>
         <Comments />
       </Route>
     </>

@@ -2,11 +2,16 @@
   margin: 1rem 0;
   padding: 1rem;
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
+  flex-direction: column;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
   background-color: #c2e7f0;
+}
+
+@media (min-width: 37.5em) {
+  .item {
+    align-items: flex-end;
+  }
 }
 
 .item:last-of-type {
@@ -14,13 +19,13 @@
 }
 
 .item figure {
-  margin: 0;
+  margin: 0 0 1.5rem;
   padding: 0;
-  width: 70%;
+  width: 100%;
 }
 
 .item blockquote {
-  margin: 0;
+  margin: 0 0 1rem;
   text-align: left;
   font-size: 1.5rem;
   color: #212929;
@@ -34,4 +39,8 @@
 .item figcaption {
   font-style: italic;
   color: #566d6d;
+}
+
+.item .btn {
+  text-align: center;
 }
