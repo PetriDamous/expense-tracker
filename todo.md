@@ -30,3 +30,18 @@ advance-redux
 ## HW
 
 https://academind.com/tutorials/reactjs-a-custom-useform-hook
+
+## React Router
+
+1. Look at custom hooks
+2. go over http costume hook again
+3. Form Validation custom hook for final project
+4. Deploy this app in the deploy section
+5. fix responsive design
+6. upgrad to react router v6 do on Dec 4th
+
+## Redux and Context
+
+1. Make a food order app that uses redux instead of context (our full scale project meets this requirement)
+2. All redux projects shopping cart apps, re-do them using context, add any custom hooks as well.
+3. Fix responsivness in redux and context shopping cart apps.
