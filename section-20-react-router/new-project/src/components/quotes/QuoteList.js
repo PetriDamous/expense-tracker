@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { useHistory, useLocation } from "react-router";
 import sortQuotes from "../../helpers/sort";
 
@@ -14,7 +14,10 @@ const QuoteList = (props) => {
   const sortedQuotesArray = sortQuotes(props.quotes, isAscending);
 
   const handleSortChange = () => {
-    history.push(`/quotes?sort=${isAscending ? "des" : "asc"}`);
+    history.push({
+      pathname: location.pathname,
+      search: `?sort=${isAscending ? "des" : "asc"}`,
+    });
   };
 
   return (

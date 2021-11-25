@@ -7,6 +7,8 @@ import QuoteDetail from "./pages/QuoteDetail";
 import PageNotFound from "./pages/PageNotFound";
 
 function App() {
+  const dog = "woof";
+
   return (
     <Layout>
       <Switch>
@@ -17,7 +19,7 @@ function App() {
           <AllQuotes />
         </Route>
         <Route path="/quotes/:quoteId">
-          <QuoteDetail />
+          <QuoteDetail dog={dog} />
         </Route>
         <Route path="/new-quote">
           <NewQuote />
