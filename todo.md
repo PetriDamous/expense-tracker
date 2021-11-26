@@ -39,6 +39,8 @@ https://academind.com/tutorials/reactjs-a-custom-useform-hook
 4. Deploy this app in the deploy section
 5. fix responsive design
 6. upgrad to react router v6 do on Dec 4th
+7. See if you can create a hook for the loading, error, and display repeated code in the following components:
+   a. Comments, NewComments, whatever quote components have similar logic
 
 ## Redux and Context
 
