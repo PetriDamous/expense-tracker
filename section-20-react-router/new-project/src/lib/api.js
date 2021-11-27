@@ -86,8 +86,6 @@ export async function getAllComments(quoteId) {
 
   const transformedComments = [];
 
-  console.log(data);
-
   for (const key in data) {
     const commentObj = {
       id: key,
